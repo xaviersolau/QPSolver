@@ -24,7 +24,7 @@ QPSolver project is written by Xavier Solau. It's licensed under the MIT license
 ## Features
 
 * Quadratic programming optimization solver.
-* Constrained least square problem solver (QP).
+* Constrained least squares problem solver (QP).
 
 ## Installation
 
@@ -51,4 +51,11 @@ Note that you can find code examples in this repository at this location: `src/e
 
 ### Set up the dependency injection
 
-Coming soon.
+A few lines of code are actually needed to setup the QPSolver services. You just need to use the
+name space SoloX.QPSolver to get access to the right extension methods and to add the services in
+your ServiceCollection :
+
+```
+// Add QPSolver services.
+builder.Services.AddQuadraticProgrammingEngine();
+```
