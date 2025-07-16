@@ -1,0 +1,26 @@
+<Project>
+
+  <PropertyGroup>
+    <Version>1.0.0-alpha.1</Version>
+    <Authors>Xavier Solau</Authors>
+    <Copyright>Copyright © 2025 Xavier Solau</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/xaviersolau/QPSolver</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/xaviersolau/QPSolver.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
+    <CodeQualityHeaderCompanyName>$(Authors)</CodeQualityHeaderCompanyName>
+    <CodeQualityHeaderCopyright>$(Copyright)</CodeQualityHeaderCopyright>
+    <CodeQualityHeaderLicense>$(PackageLicenseExpression)</CodeQualityHeaderLicense>
+    <CodeQualityHeaderLicenseFile>LICENSE</CodeQualityHeaderLicenseFile>
+
+    <CodeQualityUpdateGitIgnore>true</CodeQualityUpdateGitIgnore>
+
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+
+  </PropertyGroup>
+
+</Project>

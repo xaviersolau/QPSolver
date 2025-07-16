@@ -1,0 +1,64 @@
+name: Build - PR
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 9.0.103
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --configuration Release --no-restore --no-build
+
+  coverage-pr:
+    needs: build-pr
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        test_path:
+          - src/tests/SoloX.QPSolver.UTests
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 9.0.103
+    - name: Install dependencies ${{ matrix.test_path }}
+      run: dotnet restore ${{ matrix.test_path }}
+    - name: Build ${{ matrix.test_path }}
+      run: dotnet build ${{ matrix.test_path }} --configuration Release --no-restore
+    - name: Test Coverage ${{ matrix.test_path }}
+      run: dotnet test ${{ matrix.test_path }} --configuration Release --no-restore --no-build --collect:"XPlat Code Coverage" --settings coverlet.runsettings
+    - name: Moving test results
+      run: mv ${{ matrix.test_path }}/TestResults/**/coverage.cobertura.xml ${{ matrix.test_path }}/TestResults/coverage.cobertura.xml
+    - name: Send to coverals
+      uses: coverallsapp/github-action@v2.2.3
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        file: ${{ matrix.test_path }}/TestResults/coverage.cobertura.xml
+        format: cobertura
+        flag-name: test-${{ matrix.test_path }}
+        parallel: true
+
+  end-coverage-pr:
+    needs: coverage-pr
+    runs-on: ubuntu-latest
+    steps:
+    - name: Finish coverals
+      uses: coverallsapp/github-action@v2.2.3
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        parallel-finished: true
