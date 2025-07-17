@@ -182,7 +182,7 @@ namespace SoloX.QPSolver.UTests
 
                     var fx = qpEngine.Fx(qpProblem, x);
 
-                    var x1 = x + Vector<double>.Build.Dense(x.Count);
+                    var x1 = Vector<double>.Build.Dense(x.Count);
                     var tryCount = 10000;
 
                     var alreadySet = false;
@@ -265,7 +265,7 @@ namespace SoloX.QPSolver.UTests
 
                     var fx = qpEngine.Fx(qpProblem, x);
 
-                    var x1 = x + Vector<double>.Build.Dense(x.Count);
+                    var x1 = Vector<double>.Build.Dense(x.Count);
                     var tryCount = 10000;
 
                     var alreadySet = false;
@@ -354,7 +354,7 @@ namespace SoloX.QPSolver.UTests
 
                     var fx = qpEngine.Fx(qpProblem, x);
 
-                    var x1 = x + Vector<double>.Build.Dense(x.Count);
+                    var x1 = Vector<double>.Build.Dense(x.Count);
                     var tryCount = 10000;
 
                     var alreadySet = false;
