@@ -29,6 +29,7 @@ jobs:
       matrix:
         test_path:
           - src/tests/SoloX.QPSolver.UTests
+          - src/tests/SoloX.QPSolver.ITests
 
     steps:
     - uses: actions/checkout@v2

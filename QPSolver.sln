@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoloX.QPSolver.UTests", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoloX.QPSolver.Example.Console", "SoloX.QPSolver.Example.Console\SoloX.QPSolver.Example.Console.csproj", "{9A664C93-96DF-4D83-BC3B-F10F39BDAF67}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoloX.QPSolver.ITests", "src\tests\SoloX.QPSolver.ITests\SoloX.QPSolver.ITests.csproj", "{D38A5660-2388-4DBE-8060-AC943CC1C648}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{9A664C93-96DF-4D83-BC3B-F10F39BDAF67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A664C93-96DF-4D83-BC3B-F10F39BDAF67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A664C93-96DF-4D83-BC3B-F10F39BDAF67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D38A5660-2388-4DBE-8060-AC943CC1C648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D38A5660-2388-4DBE-8060-AC943CC1C648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D38A5660-2388-4DBE-8060-AC943CC1C648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D38A5660-2388-4DBE-8060-AC943CC1C648}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{121F90C9-E64C-4860-ABAC-799DBB4F0CF3} = {A2DC0C56-C146-4E02-839E-669CDFF81286}
 		{1208B0AF-DF10-4D2B-95C7-6AB62AA6EE42} = {A424C764-AA98-463A-9AD3-C30401A55E8C}
 		{9A664C93-96DF-4D83-BC3B-F10F39BDAF67} = {55DA5AD5-2A3D-4BB0-AE2E-4830E7957BD6}
+		{D38A5660-2388-4DBE-8060-AC943CC1C648} = {A424C764-AA98-463A-9AD3-C30401A55E8C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E5BBF0B9-C2F0-44F0-BB43-B8DA01722C78}
