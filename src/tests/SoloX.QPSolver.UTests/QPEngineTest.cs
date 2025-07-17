@@ -98,6 +98,8 @@ namespace SoloX.QPSolver.UTests
             var norm = (mA * x - b).L2Norm();
 
             norm.Should().BeLessThan(1e-6);
+
+            solution.IterationCount.Should().Be(1);
         }
 
         [Fact]
@@ -125,6 +127,8 @@ namespace SoloX.QPSolver.UTests
 
             var expected = Vector<double>.Build.Dense([2.0, 3.0]);
             (x - expected).L2Norm().Should().BeLessThan(1e-6);
+
+            solution.IterationCount.Should().Be(2);
 
             var fx = qpEngine.Fx(qpProblem, x);
 

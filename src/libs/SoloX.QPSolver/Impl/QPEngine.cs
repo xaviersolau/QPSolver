@@ -166,7 +166,7 @@ namespace SoloX.QPSolver.Impl
 
             Vector<double>? bestX = null;
 
-            for (var iter = 0; iter < maxIter; iter++)
+            for (var iter = 1; iter <= maxIter; iter++)
             {
                 if (previousActiveSetCount != activeSet.Count)
                 {
@@ -223,7 +223,7 @@ namespace SoloX.QPSolver.Impl
 
                     if (!removedOne)
                     {
-                        return new QPSolution(x);
+                        return new QPSolution(x, iter);
                     }
                 }
                 else
@@ -278,7 +278,7 @@ namespace SoloX.QPSolver.Impl
 
             if (bestX != null)
             {
-                return new QPSolution(bestX);
+                return new QPSolution(bestX, maxIter);
             }
 
             throw new InvalidOperationException("Max iterations reached without convergence.");
