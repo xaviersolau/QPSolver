@@ -168,6 +168,7 @@ namespace SoloX.QPSolver.Impl
 
             for (var iter = 1; iter <= maxIter; iter++)
             {
+                // Setup new KKT matrix if activeSet changed
                 if (previousActiveSetCount != activeSet.Count)
                 {
                     // activeSet changed so we need a new KKT matrix.
@@ -179,7 +180,6 @@ namespace SoloX.QPSolver.Impl
 
                     m = matrixAActive.RowCount;
 
-                    // Solve KKT system
                     kktMatrix = Matrix<double>.Build.Dense(n + m, n + m);
                     kktMatrix.SetSubMatrix(0, n, 0, n, matrixQ);
                     kktMatrix.SetSubMatrix(0, n, n, m, matrixAActive.Transpose());
@@ -188,6 +188,7 @@ namespace SoloX.QPSolver.Impl
                     rhs = Vector<double>.Build.Dense(n + m, 0);
                 }
 
+                // Solve KKT system
                 rhs.SetSubVector(0, n, -(matrixQ * x + vectorC));
                 rhs.SetSubVector(n, m, vectorBActive - matrixAActive * x);
 
@@ -240,13 +241,14 @@ namespace SoloX.QPSolver.Impl
                         }
 
                         var ai = matrixAInequality.Row(i);
+                        var bi = vectorBInequality[i];
 
                         var aidx = ai * dx;
-                        var aix = ai * x;
-                        var bi = vectorBInequality[i];
 
                         if (aidx > tolerance)
                         {
+                            var aix = ai * x;
+
                             var step = (bi - aix) / aidx;
                             if (step < alpha)
                             {
@@ -262,8 +264,34 @@ namespace SoloX.QPSolver.Impl
                     {
                         activeSet.Add(blockingConstraint);
                     }
-                    else if (CheckEqualityConstraints(matrixAEquality, vectorBEquality, x)
-                            && CheckInequalityConstraints(matrixAInequality, vectorBInequality, x))
+                    else
+                    {
+                        // Search for a new blocking Inequality Constraint.
+                        for (var i = 0; i < matrixAInequality.RowCount; i++)
+                        {
+                            if (activeSet.Contains(i))
+                            {
+                                continue;
+                            }
+
+                            var ai = matrixAInequality.Row(i);
+
+                            var aix = ai * x;
+                            var bi = vectorBInequality[i];
+
+                            if (aix - bi > tolerance)
+                            {
+                                activeSet.Add(i);
+                                blockingConstraint = i;
+                                break;
+                            }
+                        }
+                    }
+
+                    // Register best result if no new blocking Constraint.
+                    if (blockingConstraint < 0
+                        && CheckEqualityConstraints(matrixAEquality, vectorBEquality, x)
+                        && CheckInequalityConstraints(matrixAInequality, vectorBInequality, x))
                     {
                         var fx = Fx(problem, x);
 
@@ -278,6 +306,7 @@ namespace SoloX.QPSolver.Impl
 
             if (bestX != null)
             {
+                // Return the best X we have.
                 return new QPSolution(bestX, maxIter);
             }
 
