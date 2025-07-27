@@ -36,41 +36,41 @@ It's widely used in fields like finance, control systems, machine learning (e.g.
 Standard Form:
 Minimize:
 
-_f(x)=1/2 x ^T^ Q x + 𝑐 ^T^ x_
+_f(x)=1/2 x <sup>T</sup> Q x + 𝑐 <sup>T</sup> x_
 
 Subject to:
 
-* _Aeq_ = _beq_
-* _Aineq_ _x_ ≤ _bineq_
+* _A<sub>eq</sub>_ = _b<sub>eq</sub>_
+* _A<sub>ineq</sub>_ _x_ ≤ _b<sub>ineq</sub>_
 * _lower_ ≤ _x_ ≤ _upper_
 
 Where:
 
-* _x_ ∈ 𝑅^𝑛^ is the variable vector.
-* _Q_ ∈ 𝑅^𝑛×𝑛^ is symmetric and (usually) positive semi-definite.
-* _c_ ∈ 𝑅^𝑛^
-* _Aeq_, _beq_ are equality constraints.
-* _Aineq_, _bineq_ are inequality constraints.
+* _x_ ∈ 𝑅<sup>n</sup> is the variable vector.
+* _Q_ ∈ 𝑅<sup>n x n</sup> is symmetric and (usually) positive semi-definite.
+* _c_ ∈ 𝑅<sup>n</sup>
+* _A<sub>eq</sub>_, _b<sub>eq</sub>_ are equality constraints.
+* _A<sub>ineq</sub>_, _b<sub>ineq</sub>_ are inequality constraints.
 * _lower_, _upper_ are lower and upper bounds (box constraints).
 
 ## Least-Squares problem
 
 Least-Squares problem minimize:
 
-_|| A _x_ - b ||²_
+_|| A x - b ||²_
 
 or
 
-_(A _x_ - b)^T^(A _x_ - b)_
+_(A x - b)<sup>T</sup>(A x - b)_
 
 This is equivalent to a QP problem minimizing:
 
-_f(x)=1/2 x ^T^ Q x + 𝑐 ^T^ x_
+_f(x)=1/2 x <sup>T</sup> Q x + 𝑐 <sup>T</sup> x_
 
 With:
 
-* _Q = 2 A^T^ A_
-* _c = -2 A^T^ b_
+* _Q = 2 A<sup>T</sup> A_
+* _c = -2 A<sup>T</sup> b_
 
 
 ## Installation
