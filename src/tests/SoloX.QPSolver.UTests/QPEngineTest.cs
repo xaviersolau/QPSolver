@@ -1,14 +1,14 @@
 ﻿// ----------------------------------------------------------------------
 // <copyright file="QPEngineTest.cs" company="Xavier Solau">
-// Copyright © 2025 Xavier Solau.
+// Copyright © 2025-2026 Xavier Solau.
 // Licensed under the MIT license.
 // See LICENSE file in the project root for full license information.
 // </copyright>
 // ----------------------------------------------------------------------
 
-using FluentAssertions;
 using MathNet.Numerics.LinearAlgebra;
 using Microsoft.Extensions.Options;
+using Shouldly;
 using SoloX.QPSolver.Impl;
 
 namespace SoloX.QPSolver.UTests
@@ -51,20 +51,20 @@ namespace SoloX.QPSolver.UTests
 
             var norm = (mAeq * solution.VectorX - beq).L2Norm();
 
-            norm.Should().BeLessThan(tolerance);
+            norm.ShouldBeLessThan(tolerance);
 
             var fineq = mAineq * solution.VectorX - bineq;
 
             foreach (var fi in fineq)
             {
-                fi.Should().BeLessThan(tolerance);
+                fi.ShouldBeLessThan(tolerance);
             }
 
             for (var i = 0; i < size; i++)
             {
                 var xi = solution.VectorX[i];
-                xi.Should().BeLessThanOrEqualTo(upper[i]);
-                xi.Should().BeGreaterThanOrEqualTo(lower[i]);
+                xi.ShouldBeLessThanOrEqualTo(upper[i]);
+                xi.ShouldBeGreaterThanOrEqualTo(lower[i]);
             }
         }
 
@@ -97,9 +97,9 @@ namespace SoloX.QPSolver.UTests
 
             var norm = (mA * x - b).L2Norm();
 
-            norm.Should().BeLessThan(1e-6);
+            norm.ShouldBeLessThan(1e-6);
 
-            solution.IterationCount.Should().Be(1);
+            solution.IterationCount.ShouldBe(1);
         }
 
         [Fact]
@@ -126,9 +126,9 @@ namespace SoloX.QPSolver.UTests
             var x = solution.VectorX;
 
             var expected = Vector<double>.Build.Dense([2.0, 3.0]);
-            (x - expected).L2Norm().Should().BeLessThan(1e-6);
+            (x - expected).L2Norm().ShouldBeLessThan(1e-6);
 
-            solution.IterationCount.Should().Be(2);
+            solution.IterationCount.ShouldBe(2);
 
             var fx = qpEngine.Fx(qpProblem, x);
 
@@ -136,7 +136,7 @@ namespace SoloX.QPSolver.UTests
 
             var fxOther = qpEngine.Fx(qpProblem, xOther);
 
-            fxOther.Should().BeGreaterThan(fx);
+            fxOther.ShouldBeGreaterThan(fx);
         }
 
         [Theory]
@@ -180,8 +180,9 @@ namespace SoloX.QPSolver.UTests
                     // Make sure lower[i] <= x(i) <= upper[i] 
                     for (var i = 0; i < x.Count; i++)
                     {
-                        x[i].Should().BeGreaterThanOrEqualTo(lower[i])
-                            .And.BeLessThanOrEqualTo(upper[i]);
+                        x[i].ShouldSatisfyAllConditions(
+                            v => v.ShouldBeGreaterThanOrEqualTo(lower[i]),
+                            v => v.ShouldBeLessThanOrEqualTo(upper[i]));
                     }
 
                     var fx = qpEngine.Fx(qpProblem, x);
@@ -223,8 +224,8 @@ namespace SoloX.QPSolver.UTests
 
             }
 
-            invalidIssue.Should().Be(0);
-            minimumIssue.Should().Be(0);
+            invalidIssue.ShouldBe(0);
+            minimumIssue.ShouldBe(0);
         }
 
         [Theory]
@@ -265,7 +266,7 @@ namespace SoloX.QPSolver.UTests
                     var x = solution.VectorX;
 
                     // Make sure Equality Aeq * x = beq
-                    (mAeq * x - beq).L2Norm().Should().BeLessThan(1e-6);
+                    (mAeq * x - beq).L2Norm().ShouldBeLessThan(1e-6);
 
                     var fx = qpEngine.Fx(qpProblem, x);
 
@@ -309,8 +310,8 @@ namespace SoloX.QPSolver.UTests
 
             }
 
-            invalidIssue.Should().Be(0);
-            minimumIssue.Should().Be(0);
+            invalidIssue.ShouldBe(0);
+            minimumIssue.ShouldBe(0);
         }
 
         [Theory]
@@ -353,7 +354,7 @@ namespace SoloX.QPSolver.UTests
                     // Make sure Equality Aeq * x = beq
                     foreach (var v in (mAineq * x - bineq))
                     {
-                        v.Should().BeLessThan(1e-6);
+                        v.ShouldBeLessThan(1e-6);
                     }
 
                     var fx = qpEngine.Fx(qpProblem, x);
@@ -397,8 +398,8 @@ namespace SoloX.QPSolver.UTests
                 }
             }
 
-            invalidIssue.Should().Be(0);
-            minimumIssue.Should().Be(0);
+            invalidIssue.ShouldBe(0);
+            minimumIssue.ShouldBe(0);
         }
 
         [Fact]
@@ -428,7 +429,7 @@ namespace SoloX.QPSolver.UTests
 
             var x = solution.VectorX;
 
-            (x[0] + x[1]).Should().BeLessThan(1.0 + 1e-6);
+            (x[0] + x[1]).ShouldBeLessThan(1.0 + 1e-6);
         }
 
         [Fact]
@@ -458,7 +459,7 @@ namespace SoloX.QPSolver.UTests
 
             var x = solution.VectorX;
 
-            (x[0] + x[1] - 1.0).Should().BeLessThan(1e-6);
+            (x[0] + x[1] - 1.0).ShouldBeLessThan(1e-6);
         }
 
         [Fact]

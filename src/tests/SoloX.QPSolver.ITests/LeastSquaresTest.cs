@@ -1,14 +1,14 @@
 ﻿// ----------------------------------------------------------------------
 // <copyright file="LeastSquaresTest.cs" company="Xavier Solau">
-// Copyright © 2025 Xavier Solau.
+// Copyright © 2025-2026 Xavier Solau.
 // Licensed under the MIT license.
 // See LICENSE file in the project root for full license information.
 // </copyright>
 // ----------------------------------------------------------------------
 
-using FluentAssertions;
 using MathNet.Numerics.LinearAlgebra;
 using Microsoft.Extensions.DependencyInjection;
+using Shouldly;
 
 namespace SoloX.QPSolver.ITests
 {
@@ -49,12 +49,12 @@ namespace SoloX.QPSolver.ITests
 
             var solution = qpEngine.Solve(leastSquaresProblem);
 
-            solution.Should().NotBeNull();
+            solution.ShouldNotBeNull();
 
             var x = solution.VectorX;
 
-            qpEngine.CheckBoundsConstraints(leastSquaresProblem, x).Should().BeTrue();
-            qpEngine.CheckEqualityConstraints(leastSquaresProblem, x).Should().BeTrue();
+            qpEngine.CheckBoundsConstraints(leastSquaresProblem, x).ShouldBeTrue();
+            qpEngine.CheckEqualityConstraints(leastSquaresProblem, x).ShouldBeTrue();
 
             var vRes = mA * x - b;
             var leastSquaresResult = vRes.L2Norm();
@@ -91,7 +91,7 @@ namespace SoloX.QPSolver.ITests
                 }
 
             }
-            minimumIssue.Should().Be(0);
+            minimumIssue.ShouldBe(0);
         }
 
         private static readonly IEnumerable<IEnumerable<double>> MatrixA3Columns = [
@@ -229,12 +229,12 @@ namespace SoloX.QPSolver.ITests
 
             var solution = qpEngine.Solve(leastSquaresProblem);
 
-            solution.Should().NotBeNull();
+            solution.ShouldNotBeNull();
 
             var x = solution.VectorX;
 
-            qpEngine.CheckBoundsConstraints(leastSquaresProblem, x).Should().BeTrue();
-            qpEngine.CheckEqualityConstraints(leastSquaresProblem, x).Should().BeTrue();
+            qpEngine.CheckBoundsConstraints(leastSquaresProblem, x).ShouldBeTrue();
+            qpEngine.CheckEqualityConstraints(leastSquaresProblem, x).ShouldBeTrue();
 
             var vRes = mA * x - b;
             var leastSquaresResult = vRes.L2Norm();
@@ -248,7 +248,7 @@ namespace SoloX.QPSolver.ITests
             var vRes1 = mA * x1 - b;
             var leastSquaresResult1 = vRes1.L2Norm();
 
-            Math.Abs(leastSquaresResult - leastSquaresResult1).Should().BeLessThanOrEqualTo(1e-4);
+            Math.Abs(leastSquaresResult - leastSquaresResult1).ShouldBeLessThanOrEqualTo(1e-4);
         }
 
         private static IQPProblem CreateLeastSquaresProblem(IQPEngine qpEngine, Matrix<double> mA, Vector<double> b, string mode)

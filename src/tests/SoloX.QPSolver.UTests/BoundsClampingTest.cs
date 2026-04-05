@@ -1,14 +1,14 @@
 ﻿// ----------------------------------------------------------------------
 // <copyright file="BoundsClampingTest.cs" company="Xavier Solau">
-// Copyright © 2025 Xavier Solau.
+// Copyright © 2025-2026 Xavier Solau.
 // Licensed under the MIT license.
 // See LICENSE file in the project root for full license information.
 // </copyright>
 // ----------------------------------------------------------------------
 
 
-using FluentAssertions;
 using MathNet.Numerics.LinearAlgebra;
+using Shouldly;
 using SoloX.QPSolver.Impl;
 
 namespace SoloX.QPSolver.UTests
@@ -27,8 +27,8 @@ namespace SoloX.QPSolver.UTests
 
             boundsClamping.ApplyTo(x);
 
-            x[0].Should().Be(0.0);
-            x[1].Should().Be(1.0);
+            x[0].ShouldBe(0.0);
+            x[1].ShouldBe(1.0);
         }
 
         [Fact]
@@ -42,8 +42,8 @@ namespace SoloX.QPSolver.UTests
 
             boundsClamping.ApplyTo(x);
 
-            x[0].Should().Be(0.0);
-            x[1].Should().Be(1.001);
+            x[0].ShouldBe(0.0);
+            x[1].ShouldBe(1.001);
         }
 
         [Fact]
@@ -57,8 +57,8 @@ namespace SoloX.QPSolver.UTests
 
             boundsClamping.ApplyTo(x);
 
-            x[0].Should().Be(-0.001);
-            x[1].Should().Be(1.0);
+            x[0].ShouldBe(-0.001);
+            x[1].ShouldBe(1.0);
         }
     }
 }

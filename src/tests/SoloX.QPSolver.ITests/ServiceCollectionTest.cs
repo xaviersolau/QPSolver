@@ -1,13 +1,13 @@
 ﻿// ----------------------------------------------------------------------
 // <copyright file="ServiceCollectionTest.cs" company="Xavier Solau">
-// Copyright © 2025 Xavier Solau.
+// Copyright © 2025-2026 Xavier Solau.
 // Licensed under the MIT license.
 // See LICENSE file in the project root for full license information.
 // </copyright>
 // ----------------------------------------------------------------------
 
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using Shouldly;
 
 namespace SoloX.QPSolver.ITests
 {
@@ -24,7 +24,7 @@ namespace SoloX.QPSolver.ITests
 
             var qpEngine = provider.GetRequiredService<IQPEngine>();
 
-            qpEngine.Should().NotBeNull();
+            qpEngine.ShouldNotBeNull();
         }
     }
 }

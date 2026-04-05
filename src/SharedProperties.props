@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Version>1.0.0-alpha.2</Version>
     <Authors>Xavier Solau</Authors>
-    <Copyright>Copyright © 2025 Xavier Solau</Copyright>
+    <Copyright>Copyright © 2025-2026 Xavier Solau</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/xaviersolau/QPSolver</PackageProjectUrl>
     <RepositoryUrl>https://github.com/xaviersolau/QPSolver.git</RepositoryUrl>

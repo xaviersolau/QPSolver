@@ -1,6 +1,6 @@
 ﻿// ----------------------------------------------------------------------
 // <copyright file="QPEngineOptions.cs" company="Xavier Solau">
-// Copyright © 2025 Xavier Solau.
+// Copyright © 2025-2026 Xavier Solau.
 // Licensed under the MIT license.
 // See LICENSE file in the project root for full license information.
 // </copyright>
