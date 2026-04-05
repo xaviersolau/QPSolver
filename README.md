@@ -79,17 +79,17 @@ You can checkout this Github repository or you can use the NuGet packages:
 
 **Install using the command line from the Package Manager:**
 ```bash
-Install-Package SoloX.QPSolver -version 1.0.0-alpha.2
+Install-Package SoloX.QPSolver -version 1.0.0-alpha.3
 ```
 
 **Install using the .Net CLI:**
 ```bash
-dotnet add package SoloX.QPSolver --version 1.0.0-alpha.2
+dotnet add package SoloX.QPSolver --version 1.0.0-alpha.3
 ```
 
 **Install editing your project file (csproj):**
 ```xml
-<PackageReference Include="SoloX.QPSolver" Version="1.0.0-alpha.2" />
+<PackageReference Include="SoloX.QPSolver" Version="1.0.0-alpha.3" />
 ```
 
 ## How to use it
